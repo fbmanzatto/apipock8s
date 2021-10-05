@@ -1,39 +1,40 @@
 pipeline {
-    agent {
-        kubernetes {
-            label 'my-app'
-            yamlFile 'JenkinsKubernetesPod.yaml'
-        }
-    }
-    stages {
-        stage('Run unit tests') {
-            steps {
-              // The needed steps for your testing
-            }
-        }
+   agent any
 
-        stage('Build application') {
-            steps {
-              // Build the app
-            }
-        }
-      
-        stage('Docker publish') {
-            steps {
-              // Publish a docker image for your application 
-            }
-        }
+   environment {
+     // You must set the following environment variables
+     // ORGANIZATION_NAME
+     // YOUR_DOCKERHUB_USERNAME (it doesn't matter if you don't have one)
+     
+     SERVICE_NAME = "apipock8s"
+     //https://github.com/fbmanzatto/apipock8s.git
+     REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
+   }
 
-        stage('Deployment') {
-            steps {
-                script {
-                  container('helm') {
-                      // Init authentication and config for your kubernetes cluster
-                      sh("helm init --client-only --skip-refresh")
-                      sh("helm upgrade --install --wait prod-my-app ./helm --namespace prod")
-                    }
-                }
-            }
-        }
-    }
+   stages {
+      stage('Preparation') {
+         steps {
+            cleanWs()
+            git credentialsId: 'GITHUB', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}"
+         }
+      }
+      stage('Build') {
+         steps {
+            sh 'echo No build required for Webapp.'
+         }
+      }
+
+      stage('Build and Push Image') {
+         steps {
+           sh 'docker image build -t ${REPOSITORY_TAG} .'
+         }
+      }
+
+      stage('Deploy to Cluster') {
+          steps {
+             sh 'echo DEPLOY.'
+            //sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+          }
+      }
+   }
 }
