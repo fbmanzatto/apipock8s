@@ -32,7 +32,7 @@ pipeline {
 
       stage('Deploy to Cluster') {
           steps {
-             sh 'echo DEPLOY.'
+             sh 'echo DEPLOY. COnfigurar HELM'
             //sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
