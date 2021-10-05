@@ -32,7 +32,7 @@ pipeline {
 
       stage('Deploy to Cluster') {
           steps {
-             sh 'echo DEPLOY. COnfigurar HELM'
+             sh 'helm install ${SERVICE_NAME} ./chart/'
             //sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
