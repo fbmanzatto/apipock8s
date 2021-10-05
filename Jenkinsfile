@@ -8,7 +8,7 @@ pipeline {
      
      SERVICE_NAME = "apipock8s"
      //https://github.com/fbmanzatto/apipock8s.git
-     REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
+     REPOSITORY_TAG="${SERVICE_NAME}:${BUILD_ID}"
    }
 
    stages {
@@ -32,7 +32,7 @@ pipeline {
 
       stage('Deploy to Cluster') {
           steps {
-             sh 'helm install ${SERVICE_NAME} ./chart/'
+             sh 'helm upgrade -i  ${SERVICE_NAME} --set container.tag=${BUILD_ID} --set container.image=${SERVICE_NAME} ./chart/'
             //sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
