@@ -3,10 +3,10 @@ environment: development
 apphost: k8s
 
 label:
-  name: aspnet3core
+  name: apipock8s
 
 container:
-  name: aspnet3
+  name: apipock8s
   pullPolicy: IfNotPresent
   image: apipock8s
   tag: 0.0.0.1
