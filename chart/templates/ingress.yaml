@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: {{ .Values.ingress.rules.host }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-service
+              servicePort: {{ .Values.service.port }}
+            path: /
