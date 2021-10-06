@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: vv-retira-landing-page
-data:
-  NEXT_PUBLIC_FLAG: {{ .Values.configmap.data.NEXT_PUBLIC_FLAG }}
-  NEXT_PUBLIC_SHOP_CODE: "{{ .Values.configmap.data.NEXT_PUBLIC_SHOP_CODE }}"
-  NEXT_PUBLIC_ENVIRONMENT: {{ .Values.configmap.data.NEXT_PUBLIC_ENVIRONMENT }}
-  NEXT_PUBLIC_FAVICON: {{ .Values.configmap.data.NEXT_PUBLIC_FAVICON }}
