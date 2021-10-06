@@ -1,6 +1,6 @@
 environment: development
 
-apphost: k8s
+apphost: apipock8s
 
 label:
   name: apipock8s
@@ -9,10 +9,10 @@ container:
   name: apipock8s
   pullPolicy: IfNotPresent
   image: apipock8s
-  tag: 0.0.0.1
+  tag: 0.0.1
   port: 80
 replicas: 3
 
 service:
   port: 8888
-  type: ClusterIP
+  type: NodePort
