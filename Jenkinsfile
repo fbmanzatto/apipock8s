@@ -33,6 +33,8 @@ pipeline {
                         sh 'echo TODO: Integration Tests.'
                     }
                 }
+			}
+		}
 
       stage('Build and Push Image') {
          steps {

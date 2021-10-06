@@ -16,3 +16,7 @@ replicas: 3
 service:
   port: 8888
   type: NodePort
+
+ingress:
+  rules:
+    host: localhost
