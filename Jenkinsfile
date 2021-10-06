@@ -2,13 +2,9 @@ pipeline {
    agent any
 
    environment {
-     // You must set the following environment variables
-     // ORGANIZATION_NAME
-     // YOUR_DOCKERHUB_USERNAME (it doesn't matter if you don't have one)
-     
      SERVICE_NAME = "apipock8s"
      //https://github.com/fbmanzatto/apipock8s.git
-     REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
+     REPOSITORY_TAG="${SERVICE_NAME}:${BUILD_ID}"
    }
 
    stages {
@@ -20,9 +16,25 @@ pipeline {
       }
       stage('Build') {
          steps {
-            sh 'echo No build required for Webapp.'
+            sh 'echo TODO: Build...'
          }
       }
+
+      stage('Test') {
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        sh 'echo TODO: Unit Tests.'
+                    }
+                }
+
+                stage('Integration Tests') {
+                    steps {
+                        sh 'echo TODO: Integration Tests.'
+                    }
+                }
+			}
+		}
 
       stage('Build and Push Image') {
          steps {
@@ -32,7 +44,7 @@ pipeline {
 
       stage('Deploy to Cluster') {
           steps {
-             sh 'echo DEPLOY.'
+             sh 'helm upgrade -i  ${SERVICE_NAME} --set container.tag=${BUILD_ID} --set container.image=${SERVICE_NAME} ./chart/'
             //sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
