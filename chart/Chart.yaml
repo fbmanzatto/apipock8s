@@ -1,2 +1,4 @@
+apiVersion: v2
 name: apipock8s
 version: 1.0.0
+icon: https://play-lh.googleusercontent.com/K7ZtNUsaBydbZXFUYjpvf54KCxC3WyNPw4hs59ktYl5_KrgJB24IKX2hWe2St30J1A
