@@ -21,3 +21,7 @@ service:
 ingress:
   rules:
     host: localhost
+
+hpa:
+  maxReplicas: 10
+  minReplicas: 1
