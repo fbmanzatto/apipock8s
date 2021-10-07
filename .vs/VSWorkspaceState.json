@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\chart",
+    "\\chart\\templates"
   ],
-  "SelectedNode": "\\Jenkinsfile",
+  "SelectedNode": "\\chart\\templates\\deployment.yaml",
   "PreviewInSolutionExplorer": false
 }
